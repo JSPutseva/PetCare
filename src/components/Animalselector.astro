@@ -1,0 +1,78 @@
+---
+// AnimalSelector.astro
+// Landing page — choose between Dogs and Cats
+interface Props {
+  lang?: 'en' | 'fr';
+}
+const { lang = 'en' } = Astro.props;
+
+const t = {
+  en: { heading: 'Who would you like to read about?', dogs: 'Dogs', cats: 'Cats' },
+  fr: { heading: 'Sur qui souhaitez-vous en savoir plus\u00a0?', dogs: 'Chiens', cats: 'Chats' },
+}[lang];
+---
+
+<section class="min-h-screen flex flex-col items-center justify-center gap-12 bg-[#29524A] px-8 font-serif">
+
+  <h1 class="m-0 text-2xl md:text-3xl font-bold text-center leading-snug tracking-wide text-[#f5f0eb] max-w-[34ch]">
+    {t.heading}
+  </h1>
+
+  <div class="flex flex-wrap items-center justify-center gap-12 md:gap-20">
+
+    <!-- Dogs card — group lets children react to parent hover -->
+    <a
+      href={`/${lang}/dogs`}
+      aria-label={t.dogs}
+      class="group flex flex-col items-center gap-4 no-underline cursor-pointer"
+    >
+      <div class="
+        w-[190px] h-[190px] rounded-full bg-[#D9CB93] overflow-hidden
+        flex items-center justify-center
+        shadow-[0_4px_20px_rgba(0,0,0,0.2)]
+        transition-all duration-300 ease-in-out
+        group-hover:bg-[#DED8BF] group-hover:scale-105 group-hover:shadow-[0_8px_32px_rgba(0,0,0,0.35)]
+        group-focus-visible:bg-[#1e3d34] group-focus-visible:scale-105
+      ">
+        <img
+          src="/dog-silhouette.png"
+          alt={t.dogs}
+          width="140"
+          height="140"
+          class="w-[140px] h-[140px] object-contain transition-[filter] duration-300 group-focus-visible:invert"
+        />
+      </div>
+      <span class="text-[#7aba98] text-lg font-semibold tracking-widest transition-colors duration-300 group-hover:text-[#f5f0eb]">
+        {t.dogs}
+      </span>
+    </a>
+
+    <!-- Cats card -->
+    <a
+      href={`/${lang}/cats`}
+      aria-label={t.cats}
+      class="group flex flex-col items-center gap-4 no-underline cursor-pointer"
+    >
+      <div class="
+        w-[190px] h-[190px] rounded-full bg-[#D9CB93] overflow-hidden
+        flex items-center justify-center
+        shadow-[0_4px_20px_rgba(0,0,0,0.2)]
+        transition-all duration-300 ease-in-out
+        group-hover:bg-[#DED8BF] group-hover:scale-105 group-hover:shadow-[0_8px_32px_rgba(0,0,0,0.35)]
+        group-focus-visible:bg-[#1e3d34] group-focus-visible:scale-105
+      ">
+        <img
+          src="/cat-silhouette.png"
+          alt={t.cats}
+          width="140"
+          height="140"
+          class="w-[140px] h-[140px] object-contain transition-[filter] duration-300 group-focus-visible:invert"
+        />
+      </div>
+      <span class="text-[#7aba98] text-lg font-semibold tracking-widest transition-colors duration-300 group-hover:text-[#f5f0eb]">
+        {t.cats}
+      </span>
+    </a>
+
+  </div>
+</section>

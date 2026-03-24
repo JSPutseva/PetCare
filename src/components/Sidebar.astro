@@ -1,0 +1,67 @@
+---
+// Sidebar.astro
+interface NavItem {
+  label: string;
+  href: string;
+  children?: { label: string; href: string }[];
+}
+
+interface Props {
+  items: NavItem[];
+  currentPath?: string;
+}
+
+const { items, currentPath = Astro.url.pathname } = Astro.props;
+---
+
+<aside
+  class="fixed top-[48px] left-0 w-47 h-[calc(100vh-48px)] bg-[#e8c4b8] px-3 pt-6 pb-8 font-['Inria_Sans',sans-serif] overflow-y-auto z-40"
+  aria-label="Table of contents"
+>
+  <nav>
+    <ol class="list-none m-0 p-0 flex flex-col gap-0.5">
+      {items.map((item, i) => (
+        <li>
+          <a
+            href={item.href}
+            aria-current={currentPath === item.href ? 'page' : undefined}
+            class:list={[
+              'flex items-baseline gap-1 no-underline rounded px-1 py-0.5 text-xl font-semibold leading-snug transition-all duration-150',
+              currentPath === item.href
+                ? 'bg-[rgba(45,90,78,0.18)] text-[#1e3d34] font-bold'
+                : 'text-[#774A33] hover:bg-[#DEAFAA] hover:text-white',
+            ]}
+          >
+            <span class="tabular-nums shrink-0">{i + 1}.</span>
+            {item.label}
+          </a>
+
+          {item.children && item.children.length > 0 && (
+            <ul class="list-none m-0 mt-0.5 mb-1 p-0 flex flex-col gap-0.5 pl-1">
+              {item.children.map(child => (
+                <li>
+                  <a
+                    href={child.href}
+                    aria-current={currentPath === child.href ? 'page' : undefined}
+                    class:list={[
+                      'flex items-baseline gap-1.5 no-underline rounded px-1 py-0.5 text-m leading-snug transition-all duration-150',
+                      currentPath === child.href
+                        ? 'bg-[rgba(45,90,78,0.18)] text-[#1e3d34] font-bold'
+                        : 'text-[#774A33] hover:text-white',
+                    ]}
+                  >
+                    <span class="text-[#7a9070] font-light shrink-0" aria-hidden="true">|</span>
+                    {child.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ol>
+  </nav>
+</aside>
+
+<!-- Spacer so the fixed sidebar doesn't overlap the main content -->
+<div class="w-40 shrink-0" aria-hidden="true"></div>

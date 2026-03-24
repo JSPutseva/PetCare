@@ -1,0 +1,161 @@
+---
+// Navbar.astro
+interface Props {
+  lang?: 'en' | 'fr';
+  animal?: 'cats' | 'dogs';
+}
+const { lang = 'en', animal } = Astro.props;
+
+const t = {
+  en: {
+    cats: 'Cats',
+    dogs: 'Dogs',
+    catsMenu: [
+      { label: 'Feeding',     href: '/en/cats#feeding' },
+      { label: 'Litter',      href: '/en/cats#litter' },
+      { label: 'Environment', href: '/en/cats#environment' },
+      { label: 'Health',      href: '/en/cats#health' },
+      { label: 'Behaviour',   href: '/en/cats#behaviour' },
+    ],
+    dogsMenu: [
+      { label: 'Feeding',     href: '/en/dogs#feeding' },
+      { label: 'Environment', href: '/en/dogs#environment' },
+      { label: 'Health',      href: '/en/dogs#health' },
+      { label: 'Behaviour',   href: '/en/dogs#behaviour' },
+    ],
+  },
+  fr: {
+    cats: 'Chats',
+    dogs: 'Chiens',
+    catsMenu: [
+      { label: 'Alimentation', href: '/fr/cats#alimentation' },
+      { label: 'Litière',      href: '/fr/cats#litiere' },
+      { label: 'Environnement',href: '/fr/cats#environnement' },
+      { label: 'Santé',        href: '/fr/cats#sante' },
+      { label: 'Comportement', href: '/fr/cats#comportement' },
+    ],
+    dogsMenu: [
+      { label: 'Alimentation', href: '/fr/dogs#alimentation' },
+      { label: 'Environnement',href: '/fr/dogs#environnement' },
+      { label: 'Santé',        href: '/fr/dogs#sante' },
+      { label: 'Comportement', href: '/fr/dogs#comportement' },
+    ],
+  },
+}[lang];
+
+const otherLang    = lang === 'en' ? 'fr' : 'en';
+const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
+---
+
+<!-- Fixed navbar + invisible spacer so content starts below it -->
+<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-2.5 bg-[#7a9070] h-[48px]">
+
+  <div class="flex gap-3">
+
+    <!-- CATS -->
+    <div class="relative group">
+      <a
+        href={`/${lang}/cats`}
+        class:list={[
+          'inline-block px-5 py-1.5 rounded-md text-[#f5f0eb] text-m font-semibold tracking-wide no-underline transition-all duration-200',
+          animal === 'cats' ? 'bg-[#1e3d34]' : 'bg-[#2d5a4e] hover:bg-[#1e3d34]',
+        ]}
+      >
+        {t.cats}
+      </a>
+      <div class="absolute left-0 top-full h-2 w-full"></div>
+      <ul class="
+        absolute top-[calc(100%+8px)] left-0 z-50
+        min-w-[160px] bg-[#2d5a4e] rounded-md py-1.5
+        shadow-[0_8px_24px_rgba(0,0,0,0.22)]
+        list-none m-0
+        invisible opacity-0 translate-y-1
+        group-hover:visible group-hover:opacity-100 group-hover:translate-y-0
+        group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0
+        transition-all duration-150
+      ">
+        {t.catsMenu.map(item => (
+          <li>
+            <a href={item.href} class="block px-4 py-2 text-[#f5f0eb] text-sm no-underline border-b border-[rgba(245,240,235,0.12)] last:border-b-0 hover:bg-[#DED8BF] hover:text-[#29524A] transition-colors duration-150">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- DOGS -->
+    <div class="relative group">
+      <a
+        href={`/${lang}/dogs`}
+        class:list={[
+          'inline-block px-5 py-1.5 rounded-md text-[#f5f0eb] text-m font-semibold tracking-wide no-underline transition-all duration-200',
+          animal === 'dogs' ? 'bg-[#1e3d34]' : 'bg-[#2d5a4e] hover:bg-[#1e3d34]',
+        ]}
+      >
+        {t.dogs}
+      </a>
+      <div class="absolute left-0 top-full h-2 w-full"></div>
+      <ul class="
+        absolute top-[calc(100%+8px)] left-0 z-50
+        min-w-[160px] bg-[#2d5a4e] rounded-md py-1.5
+        shadow-[0_8px_24px_rgba(0,0,0,0.22)]
+        list-none m-0
+        invisible opacity-0 translate-y-1
+        group-hover:visible group-hover:opacity-100 group-hover:translate-y-0
+        group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0
+        transition-all duration-150
+      ">
+        {t.dogsMenu.map(item => (
+          <li>
+            <a href={item.href} class="block px-4 py-2 text-[#f5f0eb] text-sm no-underline border-b border-[rgba(245,240,235,0.12)] last:border-b-0 hover:bg-[#DED8BF] hover:text-[#29524A] transition-colors duration-150">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Language switcher -->
+  <div class="relative group">
+    <button class="px-3 py-1 rounded-md border-0 cursor-pointer bg-[#e8c4b8] text-[#2d5a4e] text-xs font-bold tracking-wider hover:bg-[#d4a898] transition-colors duration-200 flex items-center gap-1">
+      {lang.toUpperCase()}
+      <svg class="w-3 h-3 opacity-60" viewBox="0 0 10 6" fill="currentColor">
+        <path d="M0 0l5 6 5-6z"/>
+      </svg>
+    </button>
+    <div class="absolute right-0 top-full h-2 w-full"></div>
+    <ul class="
+      absolute top-[calc(100%+8px)] right-0 z-50
+      min-w-[80px] bg-[#2d5a4e] rounded-md py-1.5
+      shadow-[0_8px_24px_rgba(0,0,0,0.22)]
+      list-none m-0
+      invisible opacity-0 translate-y-1
+      group-hover:visible group-hover:opacity-100 group-hover:translate-y-0
+      group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0
+      transition-all duration-150
+    ">
+      {(['en', 'fr'] as const).map(l => (
+        <li>
+          <a
+            href={l === lang ? '#' : otherLangUrl}
+            class:list={[
+              'block px-4 py-2 text-sm no-underline transition-colors duration-150',
+              l === lang
+                ? 'text-[#f5f0eb] font-bold bg-[rgba(255,255,255,0.1)] cursor-default'
+                : 'text-[#f5f0eb] hover:bg-[#DED8BF] hover:text-[#29524A]',
+            ]}
+          >
+            {l === 'en' ? 'English' : 'Français'}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+</nav>
+
+<!-- Spacer: pushes all page content below the fixed navbar -->
+<div class="h-[48px]" aria-hidden="true"></div>
