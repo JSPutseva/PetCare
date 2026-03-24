@@ -1,5 +1,4 @@
 ---
-// Sidebar.astro
 interface NavItem {
   label: string;
   href: string;
@@ -63,5 +62,5 @@ const { items, currentPath = Astro.url.pathname } = Astro.props;
   </nav>
 </aside>
 
-<!-- Spacer so the fixed sidebar doesn't overlap the main content -->
+<!-- Spacer -->
 <div class="w-40 shrink-0" aria-hidden="true"></div>

@@ -1,5 +1,4 @@
 ---
-// Navbar.astro
 interface Props {
   lang?: 'en' | 'fr';
   animal?: 'cats' | 'dogs';
@@ -47,7 +46,6 @@ const otherLang    = lang === 'en' ? 'fr' : 'en';
 const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
 ---
 
-<!-- Fixed navbar + invisible spacer so content starts below it -->
 <nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-2.5 bg-[#7a9070] h-[48px]">
 
   <div class="flex gap-3">
@@ -157,5 +155,5 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
 
 </nav>
 
-<!-- Spacer: pushes all page content below the fixed navbar -->
+<!-- Spacer -->
 <div class="h-[48px]" aria-hidden="true"></div>

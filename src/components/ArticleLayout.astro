@@ -36,16 +36,8 @@ const { lang = 'en', animal, title, sidebarItems } = Astro.props;
 
   <body class="bg-[#f5f0eb] text-[#1e2a24] font-['Inria_Sans',sans-serif]">
 
-    <!--
-      Navbar: fixed top-0, h-[48px], renders its own spacer <div class="h-[48px]"> after itself
-      Sidebar: fixed left-0 top-[48px], w-40, renders its own spacer <div class="w-40"> after itself
-      So from the body's perspective the spacers act as normal-flow placeholders.
-      The actual <main> just needs ml-40 to clear the sidebar spacer.
-    -->
-
     <Navbar lang={lang} animal={animal} />
 
-    <!-- Row: sidebar spacer + main content (sidebar itself is fixed, spacer holds the column width) -->
     <div class="flex">
       <Sidebar items={sidebarItems} />
 
@@ -65,7 +57,6 @@ const { lang = 'en', animal, title, sidebarItems } = Astro.props;
       </main>
     </div>
 
-    <!-- Back-to-top -->
     <button
       id="backToTop"
       aria-label="Back to top"

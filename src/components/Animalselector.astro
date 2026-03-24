@@ -1,6 +1,4 @@
 ---
-// AnimalSelector.astro
-// Landing page — choose between Dogs and Cats
 interface Props {
   lang?: 'en' | 'fr';
 }
@@ -20,7 +18,7 @@ const t = {
 
   <div class="flex flex-wrap items-center justify-center gap-12 md:gap-20">
 
-    <!-- Dogs card — group lets children react to parent hover -->
+    <!-- Dogs card -->
     <a
       href={`/${lang}/dogs`}
       aria-label={t.dogs}
