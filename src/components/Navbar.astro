@@ -9,6 +9,8 @@ const t = {
   en: {
     cats: 'Cats',
     dogs: 'Dogs',
+    catsPage: `/${lang}/cats`,
+    dogsPage: `/${lang}/dogs`,
     catsMenu: [
       { label: 'Feeding',     href: '/en/cats#feeding' },
       { label: 'Litter',      href: '/en/cats#litter' },
@@ -22,10 +24,14 @@ const t = {
       { label: 'Health',      href: '/en/dogs#health' },
       { label: 'Behaviour',   href: '/en/dogs#behaviour' },
     ],
+    catsFull:  'All about cats →',
+    dogsFull:  'All about dogs →',
   },
   fr: {
     cats: 'Chats',
     dogs: 'Chiens',
+    catsPage: `/${lang}/cats`,
+    dogsPage: `/${lang}/dogs`,
     catsMenu: [
       { label: 'Alimentation', href: '/fr/cats#alimentation' },
       { label: 'Litière',      href: '/fr/cats#litiere' },
@@ -39,6 +45,8 @@ const t = {
       { label: 'Santé',        href: '/fr/dogs#sante' },
       { label: 'Comportement', href: '/fr/dogs#comportement' },
     ],
+    catsFull:  'Tout sur les chats →',
+    dogsFull:  'Tout sur les chiens →',
   },
 }[lang];
 
@@ -63,9 +71,10 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
 
     <!-- CATS -->
     <div id="dropdown-cats" class="relative group">
+
       <a
         href={`/${lang}/cats`}
-        data-dropdown-trigger
+        id="trigger-cats"
         class:list={[
           'inline-block px-3 sm:px-5 py-1.5 rounded-md text-[#f5f0eb] text-sm font-semibold tracking-wide no-underline transition-all duration-200',
           animal === 'cats' ? 'bg-[#1e3d34]' : 'bg-[#2d5a4e] hover:bg-[#1e3d34]',
@@ -84,6 +93,12 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
         group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0
         transition-all duration-150
       ">
+        <!-- Mobile-only top link -->
+        <li class="md:hidden border-b border-[rgba(245,240,235,0.25)]">
+          <a href={`/${lang}/cats`} class="block px-4 py-2 text-[#f5f0eb] text-sm font-semibold no-underline hover:bg-[#DED8BF] hover:text-[#29524A] transition-colors duration-150">
+            {t.catsFull}
+          </a>
+        </li>
         {t.catsMenu.map(item => (
           <li>
             <a href={item.href} class="block px-4 py-2 text-[#f5f0eb] text-sm no-underline border-b border-[rgba(245,240,235,0.12)] last:border-b-0 hover:bg-[#DED8BF] hover:text-[#29524A] transition-colors duration-150">
@@ -98,7 +113,7 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
     <div id="dropdown-dogs" class="relative group">
       <a
         href={`/${lang}/dogs`}
-        data-dropdown-trigger
+        id="trigger-dogs"
         class:list={[
           'inline-block px-3 sm:px-5 py-1.5 rounded-md text-[#f5f0eb] text-sm font-semibold tracking-wide no-underline transition-all duration-200',
           animal === 'dogs' ? 'bg-[#1e3d34]' : 'bg-[#2d5a4e] hover:bg-[#1e3d34]',
@@ -117,6 +132,12 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
         group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0
         transition-all duration-150
       ">
+        <!-- Mobile-only top link -->
+        <li class="md:hidden border-b border-[rgba(245,240,235,0.25)]">
+          <a href={`/${lang}/dogs`} class="block px-4 py-2 text-[#f5f0eb] text-sm font-semibold no-underline hover:bg-[#DED8BF] hover:text-[#29524A] transition-colors duration-150">
+            {t.dogsFull}
+          </a>
+        </li>
         {t.dogsMenu.map(item => (
           <li>
             <a href={item.href} class="block px-4 py-2 text-[#f5f0eb] text-sm no-underline border-b border-[rgba(245,240,235,0.12)] last:border-b-0 hover:bg-[#DED8BF] hover:text-[#29524A] transition-colors duration-150">
@@ -175,10 +196,8 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
   const isTouch = window.matchMedia('(hover: none)').matches;
 
   if (isTouch) {
-    const menuIds = ['cats', 'dogs', 'lang'] as const;
-
     function closeAll() {
-      menuIds.forEach(name => {
+      ['cats', 'dogs', 'lang'].forEach(name => {
         const menu = document.getElementById(`menu-${name}`);
         if (!menu) return;
         menu.classList.add('invisible', 'opacity-0', 'translate-y-1');
@@ -194,23 +213,18 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
     }
 
     (['cats', 'dogs'] as const).forEach(name => {
-      const link = document.querySelector<HTMLAnchorElement>(
-        `#dropdown-${name} [data-dropdown-trigger]`
-      );
+      const trigger = document.getElementById(`trigger-${name}`);
       const menu = document.getElementById(`menu-${name}`);
 
-      link?.addEventListener('click', (e) => {
+      trigger?.addEventListener('click', (e) => {
+        e.preventDefault();
         const isOpen = menu && !menu.classList.contains('invisible');
-        if (!isOpen) {
-          e.preventDefault();
-          closeAll();
-          openMenu(name);
-        }
+        closeAll();
+        if (!isOpen) openMenu(name);
       });
     });
 
-    const langBtn = document.getElementById('lang-trigger');
-    langBtn?.addEventListener('click', () => {
+    document.getElementById('lang-trigger')?.addEventListener('click', () => {
       const menu = document.getElementById('menu-lang');
       const isOpen = menu && !menu.classList.contains('invisible');
       closeAll();
@@ -218,8 +232,7 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
     });
 
     document.addEventListener('click', (e) => {
-      const insideNav = document.querySelector('nav')?.contains(e.target as Node);
-      if (!insideNav) closeAll();
+      if (!document.querySelector('nav')?.contains(e.target as Node)) closeAll();
     });
   }
 </script>
