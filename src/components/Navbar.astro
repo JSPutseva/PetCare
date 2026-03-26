@@ -76,12 +76,21 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
         href={`/${lang}/cats`}
         id="trigger-cats"
         class:list={[
-          'inline-block px-3 sm:px-5 py-1.5 rounded-md text-[#f5f0eb] text-sm font-semibold tracking-wide no-underline transition-all duration-200',
+          'hidden md:inline-block px-5 py-1.5 rounded-md text-[#f5f0eb] text-sm font-semibold tracking-wide no-underline transition-all duration-200',
           animal === 'cats' ? 'bg-[#1e3d34]' : 'bg-[#2d5a4e] hover:bg-[#1e3d34]',
         ]}
       >
         {t.cats}
       </a>
+      <button
+        id="btn-cats"
+        class:list={[
+          'md:hidden px-3 py-1.5 rounded-md text-[#f5f0eb] text-sm font-semibold tracking-wide border-0 cursor-pointer transition-all duration-200',
+          animal === 'cats' ? 'bg-[#1e3d34]' : 'bg-[#2d5a4e]',
+        ]}
+      >
+        {t.cats}
+      </button>
       <div class="absolute left-0 top-full h-2 w-full"></div>
       <ul id="menu-cats" class="
         absolute top-[calc(100%+8px)] left-0 z-50
@@ -115,12 +124,21 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
         href={`/${lang}/dogs`}
         id="trigger-dogs"
         class:list={[
-          'inline-block px-3 sm:px-5 py-1.5 rounded-md text-[#f5f0eb] text-sm font-semibold tracking-wide no-underline transition-all duration-200',
+          'hidden md:inline-block px-5 py-1.5 rounded-md text-[#f5f0eb] text-sm font-semibold tracking-wide no-underline transition-all duration-200',
           animal === 'dogs' ? 'bg-[#1e3d34]' : 'bg-[#2d5a4e] hover:bg-[#1e3d34]',
         ]}
       >
         {t.dogs}
       </a>
+      <button
+        id="btn-dogs"
+        class:list={[
+          'md:hidden px-3 py-1.5 rounded-md text-[#f5f0eb] text-sm font-semibold tracking-wide border-0 cursor-pointer transition-all duration-200',
+          animal === 'dogs' ? 'bg-[#1e3d34]' : 'bg-[#2d5a4e]',
+        ]}
+      >
+        {t.dogs}
+      </button>
       <div class="absolute left-0 top-full h-2 w-full"></div>
       <ul id="menu-dogs" class="
         absolute top-[calc(100%+8px)] left-0 z-50
@@ -213,11 +231,10 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
     }
 
     (['cats', 'dogs'] as const).forEach(name => {
-      const trigger = document.getElementById(`trigger-${name}`);
+      const btn = document.getElementById(`btn-${name}`);
       const menu = document.getElementById(`menu-${name}`);
 
-      trigger?.addEventListener('click', (e) => {
-        e.preventDefault();
+      btn?.addEventListener('click', () => {
         const isOpen = menu && !menu.classList.contains('invisible');
         closeAll();
         if (!isOpen) openMenu(name);
