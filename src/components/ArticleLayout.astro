@@ -1,7 +1,6 @@
 ---
 import Navbar  from './Navbar.astro';
 import Sidebar from './Sidebar.astro';
-
 import '../styles/global.css';
 
 interface NavItem {
@@ -45,10 +44,10 @@ const { lang = 'en', animal, title, sidebarItems } = Astro.props;
       <main
         id="main-content"
         tabindex="-1"
-        class="flex-1 bg-white min-h-[calc(100vh-48px)] px-8 md:px-12 py-8 outline-none"
+        class="flex-1 bg-white min-h-[calc(100vh-48px)] px-4 sm:px-8 md:px-12 py-6 md:py-8 outline-none"
       >
         <article>
-          <h1 class="m-0 mb-5 text-2xl md:text-3xl font-bold text-[#1e2a24] pb-3 border-b-2 border-[#e8c4b8]">
+          <h1 class="m-0 mb-5 text-xl sm:text-2xl md:text-3xl font-bold text-[#1e2a24] pb-3 border-b-2 border-[#e8c4b8]">
             {title}
           </h1>
           <div class="text-base leading-[1.8] text-[#2c3e35] max-w-[70ch] [&_p]:mb-4">
@@ -58,12 +57,13 @@ const { lang = 'en', animal, title, sidebarItems } = Astro.props;
       </main>
     </div>
 
+    <!-- Back-to-top -->
     <button
       id="backToTop"
       aria-label="Back to top"
       title="Back to top"
       class="
-        fixed bottom-6 right-6 z-50
+        fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-6 z-50
         w-11 h-11 rounded-full border-0
         bg-[#7a9070] text-white text-lg leading-none
         shadow-[0_3px_12px_rgba(0,0,0,0.2)]
