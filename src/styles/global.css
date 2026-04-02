@@ -3,3 +3,19 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #6cff6c;
+}
+::-webkit-scrollbar-thumb {
+  background: #2fc4ff;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ff0000;
+}
