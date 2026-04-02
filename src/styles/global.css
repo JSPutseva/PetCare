@@ -4,7 +4,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -15,7 +14,6 @@ html {
   background: #2fc4ff;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #ff0000;
 }
