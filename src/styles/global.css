@@ -4,16 +4,10 @@ html {
   scroll-behavior: smooth;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #6cff6c;
-}
 ::-webkit-scrollbar-thumb {
-  background: #2fc4ff;
+  background: #7a9070;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #ff0505;
+* {
+  scrollbar-color: #7a9070 #f5f0eb;
 }
