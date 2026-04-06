@@ -58,7 +58,7 @@ const otherLang    = lang === 'en' ? 'fr' : 'en';
 const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 py-2.5 bg-[#7a9070] h-[48px]">
+<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 py-2.5 bg-[#7a9070] dark:bg-[#443331] h-[48px]">
 
   <div class="flex items-center gap-2 sm:gap-3">
 
@@ -80,7 +80,7 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
         href={`/${lang}/cats`}
         class:list={[
           'hidden md:inline-block px-5 py-1.5 rounded-md text-[#f5f0eb] text-sm font-semibold tracking-wide no-underline transition-all duration-200',
-          animal === 'cats' ? 'bg-[#1e3d34]' : 'bg-[#2d5a4e] hover:bg-[#1e3d34]',
+          animal === 'cats' ? 'bg-[#1e3d34] dark:bg-[#1C0502]' : 'bg-[#2d5a4e] dark:bg-[#32130F] hover:bg-[#1e3d34] dark:hover:bg-[#63342E]',
         ]}
       >{t.cats}</a>
       <!-- Mobile -->
@@ -88,13 +88,15 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
         id="btn-cats"
         class:list={[
           'md:hidden px-3 py-1.5 rounded-md text-[#f5f0eb] text-sm font-semibold tracking-wide border-0 cursor-pointer transition-all duration-200',
-          animal === 'cats' ? 'bg-[#1e3d34]' : 'bg-[#2d5a4e]',
+          animal === 'cats' ? 'bg-[#1e3d34] dark:bg-[#1C0502]' : 'bg-[#2d5a4e] dark:bg-[#32130F]',
         ]}
       >{t.cats}</button>
       <div class="absolute left-0 top-full h-2 w-full"></div>
       <ul id="menu-cats" class="
         absolute top-[calc(100%+8px)] left-0 z-50
-        min-w-[160px] bg-[#2d5a4e] rounded-md py-1.5
+        min-w-[160px] 
+        bg-[#2d5a4e] dark:bg-[#32130F]
+        rounded-md py-1.5
         shadow-[0_8px_24px_rgba(0,0,0,0.22)] list-none m-0
         invisible opacity-0 translate-y-1
         group-hover:visible group-hover:opacity-100 group-hover:translate-y-0
@@ -102,13 +104,13 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
         transition-all duration-150
       ">
         <li class="md:hidden border-b border-[rgba(245,240,235,0.25)]">
-          <a href={`/${lang}/cats`} class="block px-4 py-2 text-[#f5f0eb] text-sm font-semibold no-underline hover:bg-[#DED8BF] hover:text-[#29524A] transition-colors duration-150">
+          <a href={`/${lang}/cats`} class="block px-4 py-2 text-[#f5f0eb] text-sm font-semibold no-underline hover:bg-[#DED8BF] dark:hover:bg-[#F3C2BC] hover:text-[#29524A] transition-colors duration-150">
             {t.catsFull}
           </a>
         </li>
         {t.catsMenu.map(item => (
           <li>
-            <a href={item.href} class="block px-4 py-2 text-[#f5f0eb] text-sm no-underline border-b border-[rgba(245,240,235,0.12)] last:border-b-0 hover:bg-[#DED8BF] hover:text-[#29524A] transition-colors duration-150">
+            <a href={item.href} class="block px-4 py-2 text-[#f5f0eb] text-sm no-underline border-b border-[rgba(245,240,235,0.12)] last:border-b-0 hover:bg-[#DED8BF] dark:hover:bg-[#F3C2BC] hover:text-[#29524A] dark:hover:text-[#32130F] transition-colors duration-150">
               {item.label}
             </a>
           </li>
@@ -122,20 +124,22 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
         href={`/${lang}/dogs`}
         class:list={[
           'hidden md:inline-block px-5 py-1.5 rounded-md text-[#f5f0eb] text-sm font-semibold tracking-wide no-underline transition-all duration-200',
-          animal === 'dogs' ? 'bg-[#1e3d34]' : 'bg-[#2d5a4e] hover:bg-[#1e3d34]',
+          animal === 'dogs' ? 'bg-[#1e3d34] dark:bg-[#1C0502]' : 'bg-[#2d5a4e]  dark:bg-[#32130F] hover:bg-[#1e3d34] dark:hover:bg-[#63342E]',
         ]}
       >{t.dogs}</a>
       <button
         id="btn-dogs"
         class:list={[
           'md:hidden px-3 py-1.5 rounded-md text-[#f5f0eb] text-sm font-semibold tracking-wide border-0 cursor-pointer transition-all duration-200',
-          animal === 'dogs' ? 'bg-[#1e3d34]' : 'bg-[#2d5a4e]',
+          animal === 'dogs' ? 'bg-[#1e3d34] dark:bg-[#1C0502]' : 'bg-[#2d5a4e] dark:bg-[#32130F]',
         ]}
       >{t.dogs}</button>
       <div class="absolute left-0 top-full h-2 w-full"></div>
       <ul id="menu-dogs" class="
         absolute top-[calc(100%+8px)] left-0 z-50
-        min-w-[160px] bg-[#2d5a4e] rounded-md py-1.5
+        min-w-[160px] 
+        bg-[#2d5a4e] dark:bg-[#32130F]
+        rounded-md py-1.5
         shadow-[0_8px_24px_rgba(0,0,0,0.22)] list-none m-0
         invisible opacity-0 translate-y-1
         group-hover:visible group-hover:opacity-100 group-hover:translate-y-0
@@ -143,13 +147,13 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
         transition-all duration-150
       ">
         <li class="md:hidden border-b border-[rgba(245,240,235,0.25)]">
-          <a href={`/${lang}/dogs`} class="block px-4 py-2 text-[#f5f0eb] text-sm font-semibold no-underline hover:bg-[#DED8BF] hover:text-[#29524A] transition-colors duration-150">
+          <a href={`/${lang}/dogs`} class="block px-4 py-2 text-[#f5f0eb] text-sm font-semibold no-underline hover:bg-[#DED8BF] dark:hover:bg-[#F3C2BC] hover:text-[#29524A] transition-colors duration-150">
             {t.dogsFull}
           </a>
         </li>
         {t.dogsMenu.map(item => (
           <li>
-            <a href={item.href} class="block px-4 py-2 text-[#f5f0eb] text-sm no-underline border-b border-[rgba(245,240,235,0.12)] last:border-b-0 hover:bg-[#DED8BF] hover:text-[#29524A] transition-colors duration-150">
+            <a href={item.href} class="block px-4 py-2 text-[#f5f0eb] text-sm no-underline border-b border-[rgba(245,240,235,0.12)] last:border-b-0 hover:bg-[#DED8BF] dark:hover:bg-[#F3C2BC] hover:text-[#29524A] dark:hover:text-[#32130F] transition-colors duration-150">
               {item.label}
             </a>
           </li>
@@ -163,7 +167,7 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
   <div id="dropdown-lang" class="relative">
     <button
       id="lang-trigger"
-      class="px-3 py-1 rounded-md border-0 cursor-pointer bg-[#e8c4b8] text-[#2d5a4e] text-xs font-bold tracking-wider hover:bg-[#d4a898] transition-colors duration-200 flex items-center gap-1"
+      class="px-3 py-1 rounded-md border-0 cursor-pointer bg-[#e8c4b8] text-[#2d5a4e] dark:text-[#4A2C28] text-xs font-bold tracking-wider hover:bg-[#d4a898] transition-colors duration-200 flex items-center gap-1"
     >
       {lang.toUpperCase()}
       <svg class="w-3 h-3 opacity-60" viewBox="0 0 10 6" fill="currentColor">
@@ -173,7 +177,9 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
     <div class="absolute right-0 top-full h-2 w-full"></div>
     <ul id="menu-lang" class="
       absolute top-[calc(100%+8px)] right-0 z-50
-      min-w-[80px] bg-[#2d5a4e] rounded-md py-1.5
+      min-w-[80px]
+      bg-[#2d5a4e] dark:bg-[#32130F]
+      rounded-md py-1.5
       shadow-[0_8px_24px_rgba(0,0,0,0.22)] list-none m-0
       invisible opacity-0 translate-y-1
       transition-all duration-150
@@ -186,7 +192,7 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
               'block px-4 py-2 text-sm no-underline transition-colors duration-150',
               l === lang
                 ? 'text-[#f5f0eb] font-bold bg-[rgba(255,255,255,0.1)] cursor-default'
-                : 'text-[#f5f0eb] hover:bg-[#DED8BF] hover:text-[#29524A]',
+                : 'text-[#f5f0eb] hover:bg-[#DED8BF] dark:hover:bg-[#C79089] hover:text-[#29524A] dark:hover:text-[#32130F]',
             ]}
           >
             {l === 'en' ? 'English' : 'Français'}
