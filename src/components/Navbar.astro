@@ -28,6 +28,7 @@ const t = {
     ],
     catsFull: 'All about cats →',
     dogsFull: 'All about dogs →',
+    fontSizes: ['Standard', 'Medium', 'Large'],
   },
   fr: {
     cats: 'Chats',
@@ -51,6 +52,7 @@ const t = {
     ],
     catsFull: 'Tout sur les chats →',
     dogsFull: 'Tout sur les chiens →',
+    fontSizes: ['Standard', 'Moyen', 'Grand'],
   },
 }[lang];
 
@@ -186,15 +188,17 @@ const otherLangUrl = Astro.url.pathname.replace(`/${lang}/`, `/${otherLang}/`);
         invisible opacity-0 translate-y-1
         transition-all duration-150
       ">
-        <li>
-          <button data-size="100" class="font-size-opt w-full text-left px-4 py-2 text-[#f5f0eb] text-sm border-0 bg-transparent cursor-pointer border-b border-[rgba(245,240,235,0.12)] hover:bg-[#DED8BF] dark:hover:bg-[#C79089] hover:text-[#29524A] dark:hover:text-[#32130F] transition-colors duration-150">Standard</button>
-        </li>
-        <li>
-          <button data-size="115" class="font-size-opt w-full text-left px-4 py-2 text-[#f5f0eb] text-sm border-0 bg-transparent cursor-pointer border-b border-[rgba(245,240,235,0.12)] hover:bg-[#DED8BF] dark:hover:bg-[#C79089] hover:text-[#29524A] dark:hover:text-[#32130F] transition-colors duration-150">Medium</button>
-        </li>
-        <li>
-          <button data-size="130" class="font-size-opt w-full text-left px-4 py-2 text-[#f5f0eb] text-sm border-0 bg-transparent cursor-pointer hover:bg-[#DED8BF] dark:hover:bg-[#C79089] hover:text-[#29524A] dark:hover:text-[#32130F] transition-colors duration-150">Large</button>
-        </li>
+        {(['100', '115', '130'] as const).map((size, i) => (
+          <li>
+            <button
+              data-size={size}
+              class:list={[
+                'font-size-opt w-full text-left px-4 py-2 text-[#f5f0eb] text-sm border-0 bg-transparent cursor-pointer hover:bg-[#DED8BF] dark:hover:bg-[#C79089] hover:text-[#29524A] dark:hover:text-[#32130F] transition-colors duration-150',
+                i < 2 && 'border-b border-[rgba(245,240,235,0.12)]',
+              ]}
+            >{t.fontSizes[i]}</button>
+          </li>
+        ))}
       </ul>
     </div>
 
