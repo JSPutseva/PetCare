@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/jeannap/Projects/**)"
+    ],
+    "additionalDirectories": [
+      "/home/jeannap/Projects/Pets/astro/src/components"
+    ]
+  }
+}
