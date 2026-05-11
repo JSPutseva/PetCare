@@ -1,6 +1,7 @@
 ---
-import Navbar  from './Navbar.astro';
-import Sidebar from './Sidebar.astro';
+import Navbar     from './Navbar.astro';
+import Sidebar    from './Sidebar.astro';
+import PopupShop  from './PopupShop.astro';
 import '../styles/global.css';
 
 interface NavItem {
@@ -37,6 +38,7 @@ const { lang = 'en', animal, title, sidebarItems } = Astro.props;
   <body class="bg-[#f5f0eb] dark:bg-[#201F1E] text-[#1e2a24] font-['Inria_Sans',sans-serif]">
 
     <Navbar lang={lang} animal={animal} />
+    <PopupShop lang={lang} />
 
     <div class="flex">
       <Sidebar items={sidebarItems} />
